@@ -17,6 +17,7 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
     public void deleteFile(String path, String name) {
         File file = new File(path + name + ".txt");
         try {
@@ -29,6 +30,7 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
     public void renameFile(String path, String name, String newName) {
         File file = new File(path + name + ".txt");
         File newFile = new File(path + newName + ".txt");
@@ -42,6 +44,7 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
     public void findWord(String path, String name, String word) {
         File file = new File(path + name + ".txt");
         Charset charset = Charset.forName("US-ASCII");
@@ -61,6 +64,7 @@ public class FileManager {
             System.err.format("IOException: %s%n", x);
         }
     }
+
     public void replaceWord(String path, String name, String word, String newWord) {
         File file = new File(path + name + ".txt");
         String text = "";
@@ -88,5 +92,11 @@ public class FileManager {
         } catch (IOException x) {
             System.err.format("IOException: %s%n", x);
         }
+
+        //Чтение xls
+
+
+        //Эапись в xls
+
     }
 }
