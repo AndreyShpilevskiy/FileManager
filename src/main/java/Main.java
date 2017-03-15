@@ -70,11 +70,11 @@ public class Main {
             } else if (num == 6) {
                 System.out.println("Enter name of xls file:");
                 String name = reader.readLine();
-                System.out.println("");
                 fileManager.readXLSFile(path, name);
             } else if (num == 7) {
                 System.out.println("Enter name of xls file:");
-                //fileManager.writeXLSFile();
+                String name = reader.readLine();
+                fileManager.writeXLSFile(path, name);
             }
         } while (true);
     }

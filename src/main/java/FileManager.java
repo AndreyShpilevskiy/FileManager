@@ -1,5 +1,6 @@
-import com.microsoft.schemas.office.visio.x2012.main.CellType;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -131,5 +132,38 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+        public static void writeXLSFile(String path, String name) {
+
+            try {
+
+                XSSFWorkbook workbook = new XSSFWorkbook();
+                XSSFSheet sheet = workbook.createSheet(name) ;
+
+                //iterating r number of rows
+                for (int r=0;r < 3; r++ ) {
+                XSSFRow row = sheet.createRow(r);
+
+                //iterating c number of columns
+                for (int c=0;c < 3; c++ ) {
+                    XSSFCell cell = row.createCell(c);
+                    cell.setCellValue("Cell "+r+" "+c);
+                }
+            }
+
+            FileOutputStream fileOut = new FileOutputStream(path + name + ".xls");
+
+                //write this workbook to an Outputstream.
+                workbook.write(fileOut);
+                fileOut.flush();
+                fileOut.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("Done");
     }
 }
