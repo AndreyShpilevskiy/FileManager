@@ -6,24 +6,28 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Enter keys to action:");
-        System.out.println("Create File - 1");
-        System.out.println("Delete File - 2");
-        System.out.println("Rename File - 3");
-        System.out.println("Find Word in file - 4");
-        System.out.println("Replace Word in file - 5");
+        System.out.println("Create txt file - 1");
+        System.out.println("Delete txt file - 2");
+        System.out.println("Rename txt file - 3");
+        System.out.println("Find Word in txt file - 4");
+        System.out.println("Replace Word in txt file - 5");
+        System.out.println("Read xls file - 6");
+        System.out.println("Write xls file - 7");
         System.out.println("Exit - 0");
 
         do {
             System.out.println("Enter your command:");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String input = reader.readLine();
+
+            FileManager fileManager = new FileManager();
+            int num = Integer.parseInt(input);
+
             if (input.equals("0")) {
                 break;
             }
-            FileManager fileManager = new FileManager();
-            int num = Integer.parseInt(input);
-            System.out.println("Enter path.");
-            //опредделение ОС и предупреждение пользователя о формате, в котором необходимо вводить пути
+
+            System.out.println("Enter path:");
             if (isWindows()) {
                 System.out.println("Example: \"C:\\Users\\Desktop\\\"");
             } else if (isMac()) {
@@ -33,8 +37,8 @@ public class Main {
             } else {
                 System.out.println("This is unknown OS");
             }
-
             String path = reader.readLine();
+
             if (num == 1) {
                 System.out.println("Enter name of new file:");
                 String name = reader.readLine();
@@ -63,14 +67,17 @@ public class Main {
                 System.out.println("Enter new word:");
                 String newWord = reader.readLine();
                 fileManager.replaceWord(path, name, word, newWord);
-            } else if (num == 6){
-                System.out.println("Enter name of .xls file:");
+            } else if (num == 6) {
+                System.out.println("Enter name of xls file:");
+                final String name = reader.readLine();
+                fileManager.readXLSFile(path, name);
             } else if (num == 7) {
-                System.out.println("Enter name of .xls file:");
+                //System.out.println("Enter name of xls file:");
+                //fileManager.writeXLSFile();
             }
-
         } while (true);
     }
+
     //опредделение ОС и предупреждение пользователя о формате, в котором необходимо вводить пути
     public static boolean isWindows() {
         String os = System.getProperty("os.name").toLowerCase();

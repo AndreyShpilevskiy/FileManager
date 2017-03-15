@@ -1,6 +1,12 @@
+import com.microsoft.schemas.office.visio.x2012.main.CellType;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.util.Iterator;
 
 
 public class FileManager {
@@ -92,11 +98,39 @@ public class FileManager {
         } catch (IOException x) {
             System.err.format("IOException: %s%n", x);
         }
+    }
 
-        //Чтение xls
+        public static void readXLSFile(String path, String name) {
 
+            try {
 
-        //Эапись в xls
+                FileInputStream file = new FileInputStream (new File(path + name + ".xlsx"));
+                XSSFWorkbook workbook = new XSSFWorkbook(file);
+                XSSFSheet sheet = workbook.getSheetAt(0);
+                Iterator<Row> iterator = sheet.iterator();
+
+                while (iterator.hasNext()) {
+
+                    Row currentRow = iterator.next();
+                    Iterator<Cell> cellIterator = currentRow.iterator();
+
+                    while (cellIterator.hasNext()) {
+
+                        Cell currentCell = cellIterator.next();
+
+                        if (currentCell.getCellType() == Cell.CELL_TYPE_STRING) {
+                            System.out.print(currentCell.getStringCellValue() + "--");
+                        } else if (currentCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+                            System.out.print(currentCell.getNumericCellValue() + "--");
+                        }
+                    }
+                    System.out.println();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
     }
 }
