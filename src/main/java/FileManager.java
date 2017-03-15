@@ -1,3 +1,5 @@
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -7,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -102,9 +105,7 @@ public class FileManager {
     }
 
     public static void readXLSFile(String path, String name) {
-
         try {
-
             FileInputStream file = new FileInputStream (new File(path + name + ".xls"));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
@@ -117,12 +118,12 @@ public class FileManager {
 
                 while (cellIterator.hasNext()) {
 
-                    Cell currentCell = cellIterator.next();
+                    Cell cell = cellIterator.next();
 
-                    if (currentCell.getCellType() == Cell.CELL_TYPE_STRING) {
-                        System.out.print(currentCell.getStringCellValue() + "  ");
-                    } else if (currentCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-                        System.out.print(currentCell.getNumericCellValue() + "  ");
+                    if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+                        System.out.print(cell.getStringCellValue() + "\t");
+                    } else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+                        System.out.print(cell.getNumericCellValue() + "\t");
                     }
                 }
                 System.out.println();
@@ -134,36 +135,39 @@ public class FileManager {
         }
     }
 
-        public static void writeXLSFile(String path, String name) {
 
-            try {
+    public static void writeXLSFile(String path, String name) {
+        try {
+            FileInputStream file = new FileInputStream(new File(path + name + ".xls"));
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
 
-                XSSFWorkbook workbook = new XSSFWorkbook();
-                XSSFSheet sheet = workbook.createSheet(name) ;
+            System.out.println("Enter data using spaces:");
 
-                //iterating r number of rows
-                for (int r=0;r < 3; r++ ) {
-                XSSFRow row = sheet.createRow(r);
+            int rowNum = 0;
+            int colNum = 0;
+            Row row = sheet.createRow(rowNum++);
+            Cell cell = row.createCell(colNum++);
 
-                //iterating c number of columns
-                for (int c=0;c < 3; c++ ) {
-                    XSSFCell cell = row.createCell(c);
-                    cell.setCellValue("Cell "+r+" "+c);
-                }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            ArrayList<String> list = new ArrayList<>();
+            for (int i = 0; i < colNum; i++) {
+                String s = reader.readLine();
+                //list.add(0, s);
+                cell.setCellValue(reader.readLine());
             }
+
+            cell.setCellValue(reader.readLine());
 
             FileOutputStream fileOut = new FileOutputStream(path + name + ".xls");
+            workbook.write(fileOut);
+            workbook.close();
 
-                //write this workbook to an Outputstream.
-                workbook.write(fileOut);
-                fileOut.flush();
-                fileOut.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println("Done");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Done.");
     }
 }
