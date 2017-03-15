@@ -16,7 +16,7 @@ public class Main {
         System.out.println("Exit - 0");
 
         do {
-            System.out.println("Enter your command:");
+            System.out.println("\nEnter your command:");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String input = reader.readLine();
 
@@ -27,13 +27,13 @@ public class Main {
                 break;
             }
 
-            System.out.println("Enter path:");
+            System.out.print("Enter path ");
             if (isWindows()) {
-                System.out.println("Example: \"C:\\Users\\Desktop\\\"");
+                System.out.println("(example: \"C:\\Users\\Desktop\\\"):");
             } else if (isMac()) {
-                System.out.println("Example: \"Macintosh HD:Documents:\"");
+                System.out.println("(example: \"Macintosh HD:Documents:\"):");
             } else if (isUnix()) {
-                System.out.println("Example: \"/home/user/docs/\"");
+                System.out.println("(example: \"/home/user/docs/\"):");
             } else {
                 System.out.println("This is unknown OS");
             }
@@ -69,10 +69,11 @@ public class Main {
                 fileManager.replaceWord(path, name, word, newWord);
             } else if (num == 6) {
                 System.out.println("Enter name of xls file:");
-                final String name = reader.readLine();
+                String name = reader.readLine();
+                System.out.println("");
                 fileManager.readXLSFile(path, name);
             } else if (num == 7) {
-                //System.out.println("Enter name of xls file:");
+                System.out.println("Enter name of xls file:");
                 //fileManager.writeXLSFile();
             }
         } while (true);

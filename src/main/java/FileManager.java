@@ -100,37 +100,36 @@ public class FileManager {
         }
     }
 
-        public static void readXLSFile(String path, String name) {
+    public static void readXLSFile(String path, String name) {
 
-            try {
+        try {
 
-                FileInputStream file = new FileInputStream (new File(path + name + ".xlsx"));
-                XSSFWorkbook workbook = new XSSFWorkbook(file);
-                XSSFSheet sheet = workbook.getSheetAt(0);
-                Iterator<Row> iterator = sheet.iterator();
+            FileInputStream file = new FileInputStream (new File(path + name + ".xls"));
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> iterator = sheet.iterator();
 
-                while (iterator.hasNext()) {
+            while (iterator.hasNext()) {
 
-                    Row currentRow = iterator.next();
-                    Iterator<Cell> cellIterator = currentRow.iterator();
+                Row currentRow = iterator.next();
+                Iterator<Cell> cellIterator = currentRow.iterator();
 
-                    while (cellIterator.hasNext()) {
+                while (cellIterator.hasNext()) {
 
-                        Cell currentCell = cellIterator.next();
+                    Cell currentCell = cellIterator.next();
 
-                        if (currentCell.getCellType() == Cell.CELL_TYPE_STRING) {
-                            System.out.print(currentCell.getStringCellValue() + "--");
-                        } else if (currentCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-                            System.out.print(currentCell.getNumericCellValue() + "--");
-                        }
+                    if (currentCell.getCellType() == Cell.CELL_TYPE_STRING) {
+                        System.out.print(currentCell.getStringCellValue() + "  ");
+                    } else if (currentCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+                        System.out.print(currentCell.getNumericCellValue() + "  ");
                     }
-                    System.out.println();
                 }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println();
             }
-
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
