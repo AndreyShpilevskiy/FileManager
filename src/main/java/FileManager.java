@@ -133,9 +133,49 @@ public class FileManager {
         }
     }
 
-    public static void writeXLSFile(String path, String name, String text) {
+    public static void writeXLSFile(String path, String name, String data) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            data = reader.readLine();
 
+            FileInputStream file = new FileInputStream (new File(path + name + ".xls"));
+            HSSFWorkbook workbook = new HSSFWorkbook(file);
+            HSSFSheet sheet = workbook.createSheet(data);//Example: Datatypes in Java
+            Object[][] datatypes = {
+                    {"Datatype", "Type", "Size(in bytes)"},
+                    {"int", "Primitive", 2},
+                    {"float", "Primitive", 4},
+                    {"double", "Primitive", 8},
+                    {"char", "Primitive", 1},
+                    {"String", "Non-Primitive", "No fixed size"}
+            };
 
+            int rowNum = 0;
+            System.out.println("Creating excel");
 
+            for (Object[] datatype : datatypes) {
+                Row row = sheet.createRow(rowNum++);
+                int colNum = 0;
+                for (Object field : datatype) {
+                    Cell cell = row.createCell(colNum++);
+                    if (field instanceof String) {
+                        cell.setCellValue((String) field);
+                    } else if (field instanceof Integer) {
+                        cell.setCellValue((Integer) field);
+                    }
+                }
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(path + name + ".xls");
+            workbook.write(outputStream);
+            workbook.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Done");
     }
 }
+

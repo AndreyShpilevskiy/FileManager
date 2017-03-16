@@ -72,11 +72,13 @@ public class Main {
                 String name = reader.readLine();
                 fileManager.readXLSFile(path, name);
             } else if (num == 7) {
-                //System.out.println("Enter name of xls file:");
-                //String name = reader.readLine();
-                //System.out.println("Enter data using spaces:");
-                //String text = reader.readLine();
-                //fileManager.writeXLSFile(path, name, text);
+                System.out.println("Enter name of xls file:");
+                String name = reader.readLine();
+                System.out.println("Enter sheet name:");
+                String data = reader.readLine();
+                System.out.println("Enter sheet name:");
+                String sheet = reader.readLine();
+                fileManager.writeXLSFile(path, name, data);
 
             }
         } while (true);
