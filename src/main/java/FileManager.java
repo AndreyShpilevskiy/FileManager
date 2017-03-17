@@ -142,39 +142,17 @@ public class FileManager {
     public static void writeXLSFile(String path, String name) {
         try {
 
-            FileInputStream file = new FileInputStream (new File(path + name + ".xls"));
+            FileInputStream file = new FileInputStream (new File(path + name + ".xlsx"));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
 
-            /*Iterator rows = sheet.rowIterator();
-            int noOfRows = 0;
-            while( rows.hasNext() ) {
-                XSSFRow row = (XSSFRow) rows.next();
-                noOfRows++;
-            }*/
-
-
             Cell cell = null;
-            cell = sheet.getRow(noOfRows+1).getCell(1);
+            cell = sheet.getRow(5).getCell(0);
+
             cell.setCellValue("OverRide existing value");
             file.close();
 
-
-            /*XSSFRow sheetrow = sheet.getRow(rowCount+1);
-            if(sheetrow == null) {
-            sheetrow = sheet.createRow(row);
-            }
-
-            cell = sheetrow.getCell(col);
-
-            if(cell == null) {
-               cell = sheetrow.createCell(col);
-            }
-            cell.setCellValue("Pass");
-*/
-
-
-            FileOutputStream outputStream = new FileOutputStream(path + name + ".xls");
+            FileOutputStream outputStream = new FileOutputStream(path + name + ".xlsx");
             workbook.write(outputStream);
             workbook.close();
 
