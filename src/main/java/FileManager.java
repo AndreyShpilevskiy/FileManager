@@ -3,6 +3,11 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.Charset;
@@ -104,9 +109,10 @@ public class FileManager {
 
     public static void readXLSFile(String path, String name) {
         try {
+
             FileInputStream file = new FileInputStream (new File(path + name + ".xls"));
-            HSSFWorkbook workbook = new HSSFWorkbook(file);
-            HSSFSheet sheet = workbook.getSheetAt(0);
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = sheet.iterator();
 
             while (iterator.hasNext()) {
@@ -133,38 +139,40 @@ public class FileManager {
         }
     }
 
-    public static void writeXLSFile(String path, String name, String data) {
+    public static void writeXLSFile(String path, String name) {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            data = reader.readLine();
 
             FileInputStream file = new FileInputStream (new File(path + name + ".xls"));
-            HSSFWorkbook workbook = new HSSFWorkbook(file);
-            HSSFSheet sheet = workbook.createSheet(data);//Example: Datatypes in Java
-            Object[][] datatypes = {
-                    {"Datatype", "Type", "Size(in bytes)"},
-                    {"int", "Primitive", 2},
-                    {"float", "Primitive", 4},
-                    {"double", "Primitive", 8},
-                    {"char", "Primitive", 1},
-                    {"String", "Non-Primitive", "No fixed size"}
-            };
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
 
-            int rowNum = 0;
-            System.out.println("Creating excel");
+            /*Iterator rows = sheet.rowIterator();
+            int noOfRows = 0;
+            while( rows.hasNext() ) {
+                XSSFRow row = (XSSFRow) rows.next();
+                noOfRows++;
+            }*/
 
-            for (Object[] datatype : datatypes) {
-                Row row = sheet.createRow(rowNum++);
-                int colNum = 0;
-                for (Object field : datatype) {
-                    Cell cell = row.createCell(colNum++);
-                    if (field instanceof String) {
-                        cell.setCellValue((String) field);
-                    } else if (field instanceof Integer) {
-                        cell.setCellValue((Integer) field);
-                    }
-                }
+
+            Cell cell = null;
+            cell = sheet.getRow(noOfRows+1).getCell(1);
+            cell.setCellValue("OverRide existing value");
+            file.close();
+
+
+            /*XSSFRow sheetrow = sheet.getRow(rowCount+1);
+            if(sheetrow == null) {
+            sheetrow = sheet.createRow(row);
             }
+
+            cell = sheetrow.getCell(col);
+
+            if(cell == null) {
+               cell = sheetrow.createCell(col);
+            }
+            cell.setCellValue("Pass");
+*/
+
 
             FileOutputStream outputStream = new FileOutputStream(path + name + ".xls");
             workbook.write(outputStream);
@@ -177,5 +185,6 @@ public class FileManager {
         }
         System.out.println("Done");
     }
+
 }
 

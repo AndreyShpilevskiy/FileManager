@@ -74,11 +74,11 @@ public class Main {
             } else if (num == 7) {
                 System.out.println("Enter name of xls file:");
                 String name = reader.readLine();
-                System.out.println("Enter sheet name:");
-                String data = reader.readLine();
-                System.out.println("Enter sheet name:");
-                String sheet = reader.readLine();
-                fileManager.writeXLSFile(path, name, data);
+                //System.out.println("Enter sheet name:");
+                //String sheet = reader.readLine();
+                //System.out.println("Enter data:");
+                //String data = reader.readLine();
+                fileManager.writeXLSFile(path, name);
 
             }
         } while (true);
