@@ -134,21 +134,15 @@ public class FileManager {
         }
     }
 
-    public static void writeXLSFile(String path, String name, String data){
+    public static void writeXLSXFile(String path, String name, String data){
         try {
-            //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             FileInputStream file = new FileInputStream (new File(path + name + ".xlsx"));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
-            Iterator<Row> iterator = sheet.iterator();
 
-            Row header = sheet.getRow(0);
-            int n = header.getLastCellNum();
-
-            Cell cell = null;
-            cell = sheet.getRow(n+2).getCell(0);
-
+            Row row = sheet.getRow(0);
+            Cell cell = row.getCell(0);
             cell.setCellValue(data);
             file.close();
 

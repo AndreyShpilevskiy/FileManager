@@ -76,7 +76,7 @@ public class Main {
                 String name = reader.readLine();
                 System.out.println("Enter data:");
                 String data = reader.readLine();
-                fileManager.writeXLSFile(path, name, data);
+                fileManager.writeXLSXFile(path, name, data);
 
             }
         } while (true);
