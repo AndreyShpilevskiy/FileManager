@@ -109,21 +109,16 @@ public class FileManager {
 
     public static void readXLSFile(String path, String name) {
         try {
-
             FileInputStream file = new FileInputStream (new File(path + name + ".xls"));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = sheet.iterator();
 
             while (iterator.hasNext()) {
-
                 Row currentRow = iterator.next();
                 Iterator<Cell> cellIterator = currentRow.iterator();
-
                 while (cellIterator.hasNext()) {
-
                     Cell cell = cellIterator.next();
-
                     if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
                         System.out.print(cell.getStringCellValue() + "\t\t");
                     } else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
@@ -139,9 +134,8 @@ public class FileManager {
         }
     }
 
-    public static void writeXLSFile(String path, String name) {
+    public static void writeXLSFile(String path, String name, String data){
         try {
-
             //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             FileInputStream file = new FileInputStream (new File(path + name + ".xlsx"));
@@ -155,24 +149,8 @@ public class FileManager {
             Cell cell = null;
             cell = sheet.getRow(n+2).getCell(0);
 
-            cell.setCellValue("5");
+            cell.setCellValue(data);
             file.close();
-
-            /*
-            while (iterator.hasNext()) {
-                Row currentRow = iterator.next();
-                Iterator<Cell> cellIterator = currentRow.iterator();
-                while (cellIterator.hasNext()) {
-                    //Cell cell = cellIterator.next();
-                    Cell cell = null;
-                    if (cell.getCellType() == Cell.CELL_TYPE_BLANK) {
-                        cell.setCellValue("OverRide existing value check one");
-                    }
-                }
-            }*/
-
-            //s = column.getStringCellValue();
-            // s = reader.readLine();
 
             FileOutputStream outputStream = new FileOutputStream(path + name + ".xlsx");
             workbook.write(outputStream);
