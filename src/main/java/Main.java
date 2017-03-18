@@ -74,10 +74,8 @@ public class Main {
             } else if (num == 7) {
                 System.out.println("Enter name of xls file:");
                 String name = reader.readLine();
-                //System.out.println("Enter sheet name:");
-                //String sheet = reader.readLine();
                 //System.out.println("Enter data:");
-                //String data = reader.readLine();
+                //String s = reader.readLine();
                 fileManager.writeXLSFile(path, name);
 
             }
