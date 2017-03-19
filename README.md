@@ -1,8 +1,8 @@
 # LR4
 This is LR4. FileManagerMaven
 
-This FileManager can work with text files. You can create, delete, find and rename files with format ".txt" and also find
-key words in the text of the file.
+This FileManager can work with text and xlsx files. You can create, delete, find and rename files with format ".txt" and also find
+key words in the text of the file. Also you can read the Microsoft Excel sheets and edit them.
 
 Choosing directory
 
