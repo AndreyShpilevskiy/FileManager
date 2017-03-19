@@ -109,7 +109,7 @@ public class FileManager {
 
     public static void readXLSFile(String path, String name) {
         try {
-            FileInputStream file = new FileInputStream (new File(path + name + ".xls"));
+            FileInputStream file = new FileInputStream (new File(path + name + ".xlsx"));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = sheet.iterator();
@@ -157,6 +157,4 @@ public class FileManager {
         }
         System.out.println("Done");
     }
-
 }
-

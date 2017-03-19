@@ -68,11 +68,11 @@ public class Main {
                 String newWord = reader.readLine();
                 fileManager.replaceWord(path, name, word, newWord);
             } else if (num == 6) {
-                System.out.println("Enter name of xls file:");
+                System.out.println("Enter name of xlsx file:");
                 String name = reader.readLine();
                 fileManager.readXLSFile(path, name);
             } else if (num == 7) {
-                System.out.println("Enter name of xls file:");
+                System.out.println("Enter name of xlsx file:");
                 String name = reader.readLine();
                 System.out.println("Enter data:");
                 String data = reader.readLine();
