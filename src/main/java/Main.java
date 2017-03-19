@@ -70,14 +70,19 @@ public class Main {
             } else if (num == 6) {
                 System.out.println("Enter name of xlsx file:");
                 String name = reader.readLine();
-                fileManager.readXLSFile(path, name);
+                fileManager.readXLSXFile(path, name);
             } else if (num == 7) {
                 System.out.println("Enter name of xlsx file:");
                 String name = reader.readLine();
-                System.out.println("Enter data:");
+                System.out.println("Enter new data:");
                 String data = reader.readLine();
                 fileManager.writeXLSXFile(path, name, data);
-
+            } else if (num == 8){
+                System.out.println("Enter name of xlsx file:");
+                String name = reader.readLine();
+                System.out.println("Enter content to found:");
+                String content = reader.readLine();
+                fileManager.findXLSX(path, name, content);
             }
         } while (true);
     }

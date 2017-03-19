@@ -1,20 +1,10 @@
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.awt.*;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.util.Date;
 import java.util.Iterator;
-
 
 public class FileManager {
 
@@ -98,18 +88,18 @@ public class FileManager {
                 FileWriter writer = new FileWriter(path + name + ".txt");
                 writer.write(newText);
                 writer.close();
-                System.out.println("Word \"" + word + "\" replaced with \"" +newWord+ "\".");
+                System.out.println("Word \"" + word + "\" replaced with \"" + newWord + "\".");
             } else {
-                System.out.println("Word \"" + word + "\" is missing in the \"" +name+ "\" file.");
+                System.out.println("Word \"" + word + "\" is missing in the \"" + name + "\" file.");
             }
         } catch (IOException x) {
             System.err.format("IOException: %s%n", x);
         }
     }
 
-    public static void readXLSFile(String path, String name) {
+    public static void readXLSXFile(String path, String name) {
         try {
-            FileInputStream file = new FileInputStream (new File(path + name + ".xlsx"));
+            FileInputStream file = new FileInputStream(new File(path + name + ".xlsx"));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = sheet.iterator();
@@ -134,10 +124,10 @@ public class FileManager {
         }
     }
 
-    public static void writeXLSXFile(String path, String name, String data){
+    public static void writeXLSXFile(String path, String name, String data) {
         try {
 
-            FileInputStream file = new FileInputStream (new File(path + name + ".xlsx"));
+            FileInputStream file = new FileInputStream(new File(path + name + ".xlsx"));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
 
@@ -155,6 +145,32 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Done");
+        System.out.println("Changes are saved.");
+    }
+
+    public static void findXLSX(String path, String name, String content) {
+        try {
+
+            FileInputStream file = new FileInputStream(new File(path + name + ".xlsx"));
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+
+            Iterator<Row> iterator = sheet.iterator();
+            while (iterator.hasNext()) {
+                Row currentRow = iterator.next();
+                Iterator<Cell> cellIterator = currentRow.iterator();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    if (cell.getStringCellValue().toString().trim().equals(content)) {
+                        System.out.println("File contains provided data.");
+                    } else {
+                        System.out.println("Data not found.");
+                    }}}
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
