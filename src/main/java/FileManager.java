@@ -135,7 +135,6 @@ public class FileManager {
             Cell cell = row.getCell(0);
             cell.setCellValue(data);
             file.close();
-
             FileOutputStream outputStream = new FileOutputStream(path + name + ".xlsx");
             workbook.write(outputStream);
             workbook.close();
