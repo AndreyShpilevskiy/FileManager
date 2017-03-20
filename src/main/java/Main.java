@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -9,10 +8,11 @@ public class Main {
         System.out.println("Create txt file - 1");
         System.out.println("Delete txt file - 2");
         System.out.println("Rename txt file - 3");
-        System.out.println("Find Word in txt file - 4");
-        System.out.println("Replace Word in txt file - 5");
-        System.out.println("Read xls file - 6");
-        System.out.println("Write xls file - 7");
+        System.out.println("Find word in txt file - 4");
+        System.out.println("Replace word in txt file - 5");
+        System.out.println("Read xlsx file - 6");
+        System.out.println("Write xlsx file - 7");
+        System.out.println("Find word in xlsx file - 8");
         System.out.println("Exit - 0");
 
         do {
@@ -82,12 +82,11 @@ public class Main {
                 String name = reader.readLine();
                 System.out.println("Enter content to found:");
                 String content = reader.readLine();
-                fileManager.findXLSX(path, name, content);
+                fileManager.findWordXLSX(path, name, content);
             }
         } while (true);
     }
 
-    //опредделение ОС и предупреждение пользователя о формате, в котором необходимо вводить пути
     public static boolean isWindows() {
         String os = System.getProperty("os.name").toLowerCase();
         return (os.contains("win"));

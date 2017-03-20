@@ -147,12 +147,13 @@ public class FileManager {
         System.out.println("Changes are saved.");
     }
 
-    public static void findXLSX(String path, String name, String content) {
+    public static void findWordXLSX(String path, String name, String content) {
         try {
 
             FileInputStream file = new FileInputStream(new File(path + name + ".xlsx"));
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
+            boolean flag = false;
 
             Iterator<Row> iterator = sheet.iterator();
             while (iterator.hasNext()) {
@@ -160,12 +161,18 @@ public class FileManager {
                 Iterator<Cell> cellIterator = currentRow.iterator();
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
-                    if (cell.getStringCellValue().toString().trim().equals(content)) {
-                        System.out.println("File contains provided data.");
-                    } else {
-                        System.out.println("Data not found.");
-                    }}}
-
+                    if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+                        if (cell.getStringCellValue().toString().trim().equals(content)) {
+                            flag = true;
+                        }
+                    }
+                }
+            }
+            if (flag) {
+                System.out.println("File contains provided word.");
+            } else {
+                System.out.println("Word \"" + content + "\" not found.");
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
