@@ -1,8 +1,7 @@
-# LR4
-This is LR4. FileManagerMaven
+FileManagerMaven
 
-This FileManager can work with text and xlsx files. You can create, delete, find and rename files with format ".txt" and also find
-key words in the text of the file. Also you can read the Microsoft Excel sheets and edit them.
+This FileManager can work with text and Microsoft Excel files in ".xlsx" format. You can create, delete, find and rename files with format ".txt"
+and also find key words in file and replace them. Also you can read the Microsoft Excel sheets and edit them.
 
 Choosing directory
 
@@ -10,9 +9,7 @@ After you choosing any action before you start perform operations on files the p
 directory. Depending on operating system it will give you an example of the correct path entry. For example,
 is you are a windows user after you choosing action you will see the following message: "Enter path. Example: "C:\Users\Desktop\"").
 
-Keys to action
-
-To use the program enter the following keys:
+Keys to action with text files:
 
 1 - Create file. After successfully creating a file you will see next message - "File named "fileName" created
 successfully!". File names must not be repeated. If you want to create a file with a name that already exists you will
@@ -33,11 +30,17 @@ you will see message "File contains provided word.
 5 - Replace word in file. To replace the word in a file first of all you must enter a file name to found it. Than you
 can enter existing word and new word that will replace it.
 
-6 - Read xlsx files. Displays all the content of the Microsoft Excel file with the 'xlsx' extension.
+Keys to action with Microsoft Excel files:
 
-7 - Insert new data into xlsx file. New data will appers in the first cell in Microsoft Excel file.
+6 - Read Microsoft excel file. Displays all the content of the Microsoft Excel file with the 'xlsx' extension.
 
-8 - Find word in xlsx file. You can also find a word in file. After entering file name and word that you need to find
+7 - Insert new data into Microsoft Excel file. New data will appears in the first cell in Microsoft Excel file.
+
+8 - Find word in Microsoft Excel file. You can also find a word in file. After entering file name and word that you need to find
 you will see message "File contains provided word.
+
+9 - Replace word in Microsoft Excel. New word will replace first matching word from the beginning of the  Microsoft Excel file.
+
+10 - Replace all repeated words in Microsoft excel. Will replace all matching words in Microsoft Excel file.
 
 0 - Exit. To finish program and exit.

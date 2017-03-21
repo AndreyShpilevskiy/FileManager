@@ -231,7 +231,7 @@ public class FileManager {
                             flag = true;
                         }
                     }
-                }break;
+                }
             }
 
             if (flag) {
