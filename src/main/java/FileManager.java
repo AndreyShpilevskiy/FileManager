@@ -179,4 +179,75 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
+    public static void replaceWordXLSX(String path, String name, String content, String newContent) {
+        try {
+
+            FileInputStream file = new FileInputStream(new File(path + name + ".xlsx"));
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            boolean flag = false;
+
+            for (Row currentRow : sheet) {
+                for (Cell cell : currentRow) {
+                    if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+                        if (cell.getStringCellValue().toString().trim().equals(content)) {
+                            cell.setCellValue(newContent);
+                            flag = true;
+                        }
+                    }
+                }
+            }
+
+            if (flag) {
+                System.out.println("Word \"" + content + "\" replaced with \"" + newContent + "\".");
+            } else {
+                System.out.println("Word \"" + content + "\" not found.");
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(path + name + ".xlsx");
+            workbook.write(outputStream);
+            workbook.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void replaceAllXLSX(String path, String name, String content, String newContent) {
+        try {
+
+            FileInputStream file = new FileInputStream(new File(path + name + ".xlsx"));
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            boolean flag = false;
+
+            for (Row currentRow : sheet) {
+                for (Cell cell : currentRow) {
+                    if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+                        if (cell.getStringCellValue().toString().trim().equals(content)) {
+                            cell.setCellValue(newContent);
+                            flag = true;
+                        }
+                    }
+                }break;
+            }
+
+            if (flag) {
+                System.out.println("Word \"" + content + "\" replaced with \"" + newContent + "\".");
+            } else {
+                System.out.println("Word \"" + content + "\" not found.");
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(path + name + ".xlsx");
+            workbook.write(outputStream);
+            workbook.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

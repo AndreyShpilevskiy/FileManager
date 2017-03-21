@@ -13,6 +13,8 @@ public class Main {
         System.out.println("Read xlsx file - 6");
         System.out.println("Write xlsx file - 7");
         System.out.println("Find word in xlsx file - 8");
+        System.out.println("Replace word in xlsx file - 9");
+        System.out.println("Replace all repeated words in xlsx file - 10");
         System.out.println("Exit - 0");
 
         do {
@@ -80,9 +82,25 @@ public class Main {
             } else if (num == 8){
                 System.out.println("Enter name of xlsx file:");
                 String name = reader.readLine();
-                System.out.println("Enter content to found:");
+                System.out.println("Enter word to found:");
                 String content = reader.readLine();
                 fileManager.findWordXLSX(path, name, content);
+            } else if (num == 9){
+                System.out.println("Enter name of xlsx file:");
+                String name = reader.readLine();
+                System.out.println("Enter word that need to be replaced:");
+                String content = reader.readLine();
+                System.out.println("Enter new word:");
+                String newContent = reader.readLine();
+                fileManager.replaceWordXLSX(path, name, content, newContent);
+            } else if (num == 10){
+                System.out.println("Enter name of xlsx file:");
+                String name = reader.readLine();
+                System.out.println("Enter word that need to be replaced:");
+                String content = reader.readLine();
+                System.out.println("Enter new word:");
+                String newContent = reader.readLine();
+                fileManager.replaceAllXLSX(path, name, content, newContent);
             }
         } while (true);
     }
