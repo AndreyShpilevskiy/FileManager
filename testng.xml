@@ -1,5 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Parallel test suite" parallel="tests" thread-count="2">
+
+    <parameter name="myParam"  value="This is the value for a parameter"/>
+    <parameter name="interactive"  value="false"/>
+
+
     <test name="Test1">
         <groups>
             <run>
